@@ -90,7 +90,7 @@ asset_prices = prices(
     end=period_end
 )
 
-# STEP SIX: USE ALPHALENS 
+# STEP SIX: USE ALPHALENS TO CONNECT FACTOR AND PRICING DATA
 # Alpha Lens, like the name implies... combines your factor data and your pricing data. 
 # It then runs the returns that would've been generated, specifying the holding periods. 
 # There are two quantiles because we are looking at two cohorts, the top and bottom quartiles. 
@@ -112,5 +112,23 @@ factor_data = al.utils.get_clean_factor_and_forward_returns(
 factor_data.head(5)
 
 
+# STEP SEVEN: EVALUATE THE RETURNS AND PLOT / VISUALIZE FINDINGS
+# Calculate mean return by factor quantile
+mean_return_by_q, std_err_by_q = al.performance.mean_return_by_quantile(factor_data)
 
+# Plot mean returns by quantile and holding period
+# over evaluation time range
+al.plotting.plot_quantile_returns_bar(
+    mean_return_by_q.apply(
+        al.utils.rate_of_return,
+        axis=0,
+        args=('1D',)
+    )
+);
 
+# STEP EIGHT: EVALUATE RETURN TIME SERIES, IDENTIFY PERIODS OF DRAWDOWN
+# Calculate factor-weighted long-short portfolio returns
+ls_factor_returns = al.performance.factor_returns(factor_data)
+
+# Plot cumulative returns for 5 day holding period
+al.plotting.plot_cumulative_returns(ls_factor_returns['5D'], '5D');
