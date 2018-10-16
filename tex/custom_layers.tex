@@ -1,0 +1,97 @@
+% Upper Level Macro Model
+
+\begin{scope}[
+	yshift=-120, 
+	every node/.append style={yslant=\yslant,xslant=\xslant},
+	yslant=\yslant,xslant=\xslant
+	]
+	
+	% The frame: 
+	\fill[white,fill opacity=0.75](0,0) rectangle (7,7); 
+	\draw[black, dashed, thin](0,0) rectangle (7,7); 
+	
+	% Large points: 
+	\draw[fill=blue]
+		(2,2) circle (0.1) % Micro Factors
+		(2,4) circle (0.1) % Macro Factors
+		(5,3) circle (0.1); % Voting Model
+
+		
+	% Lines between points: 
+	\draw[-latex,thin]
+		(2,2) to[out=0, in=-90] (4.8,2.9); % off a little to show arrows
+	
+	\draw[-latex,thin]
+		(2,4) to[out=0,in=90] (4.8,3.1); % off a little to show arrows
+	
+	\fill[black]
+		(0.5,6.5) node[right,scale=.9]{\MacroLevel}
+		(2,2) node[below,scale=0.7]{\MicroFactors}
+		(2,4) node[above=0.1cm,scale=0.7]{\MacroFactors}
+		(5,3) node[right = 0.1cm, scale=0.7]{\VotingModel};
+
+\end{scope} 
+
+% Connect the Levels Together
+\draw[ultra thin](3.2,4.5) to (3.2,0.4); % this is literally X_value, Y_value think in 2D! 
+
+% Middle Level Portfolio Level
+
+\begin{scope}[
+		yshift=0,
+		every node/.append style={yslant=\yslant,xslant=\xslant},
+		yslant=\yslant,xslant=\xslant
+	]
+	
+	% The frame: 
+	\fill[white,fill opacity=0.75](0,0) rectangle (7,7);
+	\draw[black, dashed, thin](0,0) rectangle (7,7); 
+	
+	% Large points: 
+	\draw[fill=blue] 
+		(5,3) circle (0.1) % Risk Positioning (connect with Voting Model)
+		(5,5) circle (0.1) % Volatility Minimization
+		(2,4) circle (0.1); % Risk Bias
+		
+	% Lines between points: 
+	
+	\draw[-latex, thin]
+		(4.75,3) to[out=0,in=-90] (2,3.9);
+	\draw[-latex,thin]
+		(4.75,5) to[out=0,in=90] (2,4.1);  
+		
+	\fill[black]
+		(0.5,6.5) node[right,scale=0.9]{\PortfolioLevel}
+		(5,3) node[below=0.1cm, scale=0.7]{\RiskBias}
+		(2,4) node[left = 0.1cm,scale=0.7]{\Construction}
+		(5,5) node[above,scale=0.7]{\VolatilityMin};
+
+\end{scope} 
+
+
+\draw[ultra thin](-0.4,8) to (-0.4,3.9); % this is literally X_value, Y_value think in 2D! 
+
+\begin{scope}[
+		yshift=120,
+		every node/.append style={yslant=\yslant,xslant=\xslant},
+		yslant=\yslant,xslant=\xslant
+	]
+	
+	% The frame: % blue!20 is a great fill color. 
+	\fill[white,fill opacity=0.75](0,0) rectangle (7,7);
+	\draw[black, dashed, thin](0,0) rectangle (7,7); 
+	
+	% Large points: 
+	\draw[fill=blue] 
+		(2,4) circle (0.1); % Risk Bias
+		
+	% Lines between points: 
+		
+	\fill[black]
+		(0.5,6.5) node[right,scale=0.9]{\BusinessLevel}
+		(2,4) node[right= 0.1cm,scale=0.8]{\CompanyAnalysis}
+		(2,3.5) node[right= 0.1cm,scale=0.8]{\IndustryAnalysis}
+		(2,4.5) node[right=0.1cm,scale=0.8]{\MoatAnalysis};
+
+\end{scope} 
+
